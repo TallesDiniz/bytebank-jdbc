@@ -1,0 +1,19 @@
+# IntelliJ e IDEs
+.idea/
+*.iml
+out/
+gen/
+
+# Compilação e Build
+target/
+*.class
+
+# Sistema
+.DS_Store
+Thumbs.db
+
+# Arquivos de log e temporários
+*.log
+temp/
+
+config.properties

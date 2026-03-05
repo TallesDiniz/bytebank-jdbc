@@ -1,8 +1,11 @@
 package br.com.alura.bytebank;
 
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Properties;
+
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
@@ -16,13 +19,24 @@ public class ConnectionFactory {
     }
 
     private HikariDataSource createDataSource() {
-        HikariConfig config = new HikariConfig();
-        config.setJdbcUrl("jdbc:mysql://localhost:3306/byte_bank");
-        config.setUsername("root");
-        config.setPassword("Lisboa@1");
-        config.setMaximumPoolSize(10);
-
-        return new HikariDataSource(config);
+        try {
+            Properties props = loadProperties();
+            HikariConfig config = new HikariConfig();
+            config.setJdbcUrl(props.getProperty("db.url"));
+            config.setUsername(props.getProperty("db.user"));
+            config.setPassword(props.getProperty("db.password"));
+            config.setMaximumPoolSize(10);
+            return new HikariDataSource(config);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
+    private Properties loadProperties() throws IOException {
+        try (FileInputStream fs = new FileInputStream("config.properties")) {
+            Properties props = new Properties();
+            props.load(fs);
+            return props;
+        }
+    }
 }
