@@ -46,7 +46,7 @@ bytebank-jdbc/
 
 - Java 11+
 - Maven 3.6+
-- Banco de dados (PostgreSQL ou MySQL) instalado e rodando
+- Banco de dados (MySQL)
 
 ### 1. Clone o repositório
 
@@ -60,7 +60,7 @@ cd bytebank-jdbc
 Crie o banco de dados e as tabelas necessárias. Exemplo para PostgreSQL:
 
 ```sql
-CREATE DATABASE bytebank;
+CREATE DATABASE byte_bank;
 
 CREATE TABLE conta (
     id SERIAL PRIMARY KEY,
@@ -75,7 +75,7 @@ CREATE TABLE conta (
 As credenciais do banco ficam no arquivo `config.properties` na raiz do projeto:
 
 ```properties
-jdbc.url=jdbc:postgresql://localhost/bytebank
+jdbc.url=jdbc:mysql://localhost:porta/byte_bank
 jdbc.username=seu_usuario
 jdbc.password=sua_senha
 ```
