@@ -17,3 +17,6 @@ Thumbs.db
 temp/
 
 config.properties
+target/
+frontend/node_modules/
+frontend/dist/
