@@ -23,7 +23,7 @@ export default function Dashboard() {
   }, [])
 
   return (
-    <div className="min-h-screen bg-gray-950 text-white p-8">
+    <div className="min-h-screen bg-gray-950 text-white px-4 py-6 md:px-8 md:py-8">
       <Header onAbrirConta={() => setModalAberto(true)} />
       <ResumoCards contas={contas} />
       <ListaContas contas={contas} loading={loading} onAtualizar={buscarContas} />

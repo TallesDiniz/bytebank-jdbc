@@ -34,15 +34,15 @@ export function ContaCard({ conta, onAtualizar }: ContaCardProps) {
 
   return (
     <>
-      <div className="bg-gray-900 border border-gray-800 rounded-2xl p-6 hover:border-purple-800 transition-all">
-        <div className="flex justify-between items-center mb-4">
+      <div className="bg-gray-900 border border-gray-800 rounded-2xl p-4 md:p-6 hover:border-purple-800 transition-all">
+        <div className="flex justify-between items-start mb-4">
           <div>
-            <p className="text-lg font-semibold">{conta.titular.nome}</p>
-            <p className='text-gray-400 text-sm'>Email: {conta.titular.email}</p>
-            <p className="text-gray-400 text-sm">Conta: #{conta.numero}</p>
+            <p className="text-base md:text-lg font-semibold">{conta.titular.nome}</p>
+            <p className='text-gray-400 text-xs md:text-sm'>Email: {conta.titular.email}</p>
+            <p className="text-gray-400 text-xs md:text-sm">Conta: #{conta.numero}</p>
           </div>
-          <div className="text-right">
-            <p className="text-purple-500 text-xl font-bold">
+          <div className="text-right ml-2">
+            <p className="text-purple-500 text-base md:text-xl font-bold break-words">
               {conta.saldo.toLocaleString('pt-BR', {
                 style: 'currency',
                 currency: 'BRL'
@@ -51,28 +51,28 @@ export function ContaCard({ conta, onAtualizar }: ContaCardProps) {
           </div>
         </div>
 
-        <div className="grid grid-cols-4 gap-2 mt-4">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-2 mt-4">
           <button
             onClick={() => setModalAberto('depositar')}
-            className="bg-gray-800 hover:bg-purple-800 text-white text-sm font-medium py-2 rounded-xl transition-colors"
+            className="bg-gray-800 hover:bg-purple-800 text-white text-xs md:text-sm font-medium py-2 rounded-xl transition-colors"
           >
             Depositar
           </button>
           <button
             onClick={() => setModalAberto('sacar')}
-            className="bg-gray-800 hover:bg-purple-800 text-white text-sm font-medium py-2 rounded-xl transition-colors"
+            className="bg-gray-800 hover:bg-purple-800 text-white text-xs md:text-sm font-medium py-2 rounded-xl transition-colors"
           >
             Sacar
           </button>
           <button
             onClick={() => setModalAberto('transferir')}
-            className="bg-gray-800 hover:bg-purple-800 text-white text-sm font-medium py-2 rounded-xl transition-colors"
+            className="bg-gray-800 hover:bg-purple-800 text-white text-xs md:text-sm font-medium py-2 rounded-xl transition-colors"
           >
             Transferir
           </button>
           <button
             onClick={() => setModalAberto('encerrar')}
-            className="bg-gray-800 hover:bg-red-800 text-white text-sm font-medium py-2 rounded-xl transition-colors"
+            className="bg-gray-800 hover:bg-red-800 text-white text-xs md:text-sm font-medium py-2 rounded-xl transition-colors"
           >
             Encerrar
           </button>
