@@ -1,16 +1,19 @@
 package br.com.alura.bytebank;
 
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.Properties;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
 public class ConnectionFactory {
-    public Connection recuperarConexao(){
-        try{
+    public Connection recuperarConexao() {
+        try {
             return createDataSource().getConnection();
-        }catch (SQLException e){
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
@@ -20,14 +23,19 @@ public class ConnectionFactory {
         String user = System.getenv("DATABASE_USER");
         String password = System.getenv("DATABASE_PASSWORD");
 
+        // Corrige a URL se não tiver o prefixo jdbc:
+        if (url != null && !url.startsWith("jdbc:")) {
+            url = "jdbc:" + url;
+        }
+
         // Se não tiver variáveis de ambiente, usa o config.properties local
         if (url == null || url.isEmpty()) {
             try {
-                java.util.Properties props = loadProperties();
+                Properties props = loadProperties();
                 url = props.getProperty("db.url");
                 user = props.getProperty("db.user");
                 password = props.getProperty("db.password");
-            } catch (java.io.IOException e) {
+            } catch (IOException e) {
                 throw new RuntimeException(e);
             }
         }
@@ -40,9 +48,9 @@ public class ConnectionFactory {
         return new HikariDataSource(config);
     }
 
-    private java.util.Properties loadProperties() throws java.io.IOException {
-        try (java.io.FileInputStream fs = new java.io.FileInputStream("config.properties")) {
-            java.util.Properties props = new java.util.Properties();
+    private Properties loadProperties() throws IOException {
+        try (FileInputStream fs = new FileInputStream("config.properties")) {
+            Properties props = new Properties();
             props.load(fs);
             return props;
         }
