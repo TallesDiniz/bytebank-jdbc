@@ -17,7 +17,6 @@ export function ModalDepositar({ numeroConta, onClose, onSucesso }: ModalDeposit
 
   async function handleConfirmar() {
     if (!valor) return
-    setError(null)
     setLoading(true)
     try {
       await depositar(numeroConta, parseFloat(valor))

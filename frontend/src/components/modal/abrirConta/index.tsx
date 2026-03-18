@@ -15,22 +15,17 @@ export function ModalAbrirConta({ onClose, onSucesso }: ModalAbrirContaProps) {
   const [email, setEmail] = useState('')
   const [loading, setLoading] = useState(false)
 
-
   async function handleConfirmar() {
-    if (!numero || !nome || !cpf || !email) {
-      setError('Preencha todos os campos')
-      return
-    }
-    setError(null)
+    if (!numero || !nome || !cpf || !email) return
     setLoading(true)
     try {
       await abrirConta({
-      numero: parseInt(numero),
-      dadosCliente: { nome, cpf, email }
-    })
-    toast.success("Conta criada com sucesso")
-    onSucesso()
-    onClose()
+        numero: parseInt(numero),
+        dadosCliente: { nome, cpf, email }
+      })
+      toast.success("Conta criada com sucesso")
+      onSucesso()
+      onClose()
     } catch (e: unknown) {
       toast.error(e instanceof Error ? e.message : 'Ocorreu um Erro')
     } finally {
@@ -81,7 +76,6 @@ export function ModalAbrirConta({ onClose, onSucesso }: ModalAbrirContaProps) {
             className="w-full bg-gray-800 border border-gray-700 rounded-xl p-3 text-white focus:outline-none focus:border-purple-800 transition-colors"
           />
         </div>
-        
         <button
           onClick={handleConfirmar}
           disabled={loading}
